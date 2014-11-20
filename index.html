@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>My-ansible-playbooks by HanXHX</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>My-ansible-playbooks</h1>
+        <h2>Cool Ansible roles for Debian GNU/Linux</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/HanXHX/my-ansible-playbooks/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/HanXHX/my-ansible-playbooks/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/HanXHX/my-ansible-playbooks" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="my-ansible-playbooks" class="anchor" href="#my-ansible-playbooks" aria-hidden="true"><span class="octicon octicon-link"></span></a>my-ansible-playbooks</h1>
+
+<h2>
+<a id="about" class="anchor" href="#about" aria-hidden="true"><span class="octicon octicon-link"></span></a>About</h2>
+
+<p>This playbook works with: Ansible 1.7.1 and Vagrant 1.6.3
+The goal of this project is to create the "perfect" environement for PHP on Debian GNU/Linux.</p>
+
+<h2>
+<a id="todo-list" class="anchor" href="#todo-list" aria-hidden="true"><span class="octicon octicon-link"></span></a>TODO List</h2>
+
+<ul>
+<li>Manage MySQL versions: on debian wheezy repository =&gt; 5.5, on dotdeb =&gt; 5.6</li>
+<li>Create MySQL users/databases... Find any tip to create table?</li>
+<li>Split security role (should by a 'metarole') on many roles: firewall, fail2ban... etc</li>
+<li>Create standard users (with sudo)</li>
+<li>PHP-FPM socket = tcp</li>
+<li>Better "save" management in redis. Use a loop instead of using save, save2, save3...</li>
+<li>Use array of hashes for sysctl (minimal role), keys/values are hard coded :/</li>
+</ul>
+
+<h2>
+<a id="ideas-for-future" class="anchor" href="#ideas-for-future" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ideas for future</h2>
+
+<ul>
+<li>Dedicated host per service with config generated (example for MySQL: innodb_buffer_pool = 75% available RAM)</li>
+<li>Configure firewall per service used (tcp/3306 if mysql is installed)</li>
+<li>Try <a href="http://docs.ansible.com/irc_module.html">IRC module</a> (for fun only)</li>
+<li>Try Vagrant with many hosts (example: DB1 Master, DB2 Slave, Nginx proxy-cache, Nginx+PHP/FPM)</li>
+<li>Manage Debian Jessie (current testing). For example: Jessie doesn't have yet Dotdeb and Backport repository. Create 2 branches?</li>
+<li>IPv6 management (works with Vagrant/Virtualbox?)</li>
+<li>Better bashrc/vimrc</li>
+<li>Better management of OpenSSH</li>
+<li>Auto install and configure Wordpress :)</li>
+<li>Syslog to...? :)</li>
+<li>Monitoring (Nagios or Shinken)</li>
+<li>Nginx:
+
+<ul>
+<li>No-www redirect to <a href="http://www">www</a>...</li>
+<li>Reverse proxy cache</li>
+<li>Have fun with <a href="https://github.com/pagespeed/ngx_pagespeed">ngx_pagespeed</a> (available in Dotdeb: nginx-full... find any others place)</li>
+</ul>
+</li>
+<li>MySQL:
+
+<ul>
+<li>Manage replication</li>
+</ul>
+</li>
+<li>Services:
+
+<ul>
+<li>PostgreSQL</li>
+<li>
+<a href="http://redis.io/topics/sentinel">Redis Sentinel</a> (Redis 2.8 available at Dotdeb and Backports)</li>
+<li>
+<a href="http://redis.io/topics/cluster-tutorial">Redis Cluster</a> (Redis 3.x still in beta)</li>
+<li><a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/setup-repositories.html">Elasticsearch</a></li>
+<li>
+<a href="http://pkg.jenkins-ci.org/debian/">Jenkins</a> with <a href="http://jenkins-php.org/">Jenkins-PHP</a>
+</li>
+<li><a href="https://about.gitlab.com/downloads/">Gitlab</a></li>
+</ul>
+</li>
+<li>Web interfaces:
+
+<ul>
+<li><a href="https://wordpress.org/">Wordpress</a></li>
+<li><a href="http://www.phpmyadmin.net">PHPMyAdmin</a></li>
+<li><a href="https://github.com/sasanrose/phpredmin">PHPRedmin</a></li>
+</ul>
+</li>
+<li>PHP:
+
+<ul>
+<li>zmq</li>
+<li>
+<a href="https://github.com/nicolasff/phpredis">phpredis</a> (Debian Package only available on Debian Jessie/Sid or Dotdeb) + feature: Session management in Redis</li>
+</ul>
+</li>
+<li>Support FreeBSD!</li>
+</ul>
+
+<h2>
+<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes</h2>
+
+<ul>
+<li>Apache will never be supported. I really hate this program... It was the better... Now Nginx is the better. You want Apache? Fork my fuckin project!</li>
+<li>All pull-requests are welcomed :)</li>
+</ul>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
