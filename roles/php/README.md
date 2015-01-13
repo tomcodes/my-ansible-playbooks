@@ -49,4 +49,8 @@ Careful: `php_fpm_tcp_sockets` is not ready!
 	    pm_start_servers: 10
 	    pm_min_spare_servers: 10
 	    pm_max_spare_servers: 20
-	
+
+Notes
+-----
+
+- You can find a Perl script who can parse your current php.ini file to create Ansible vars ;)
