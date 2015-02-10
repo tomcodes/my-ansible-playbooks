@@ -1,0 +1,10 @@
+{% if item.use_access_log %}
+	access_log {{ nginx_log_dir }}/{{ item.name }}_access.log combined;
+{% else %}
+	access_log off;
+{% endif %}
+{% if item.use_error_log %}
+	error_log {{ nginx_log_dir }}/{{ item.name }}_error.log combined;
+{% else %}
+	error_log off;
+{% endif %}

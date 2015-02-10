@@ -1,0 +1,10 @@
+redmine_version: '2'
+
+redmine_database:
+  adapter: 'mysql'
+  database: 'redmine'
+  host: '127.0.0.1'
+  port: 3306
+  username: 'redmine'
+  password: 'change_me_NOW' 
+

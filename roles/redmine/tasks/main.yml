@@ -1,0 +1,25 @@
+---
+
+- name: APT | Install redmine 
+  apt: 
+    pkg=redmine
+    state=latest
+    update_cache=yes
+    cache_valid_time=3600
+    default_release={% if redmine_version eq '2' %}wheezy-backports{% else %}wheezy{% endif %}
+
+- name: APT | Install thin
+  apt: pkg=thin state=latest cache_valid_time=3600
+
+  # Specific debian wheezy!
+- name: TEMPLATE | Deploy thin configuration
+  template: src=etc/thinX/redmine.yml.j2 dest=etc/thin{{ ruby_version }}/redmine.yml
+  notify: restart thin
+
+- name: TEMPLATE | Deploy redmine (database) configuration
+  template: src=etc/redmine/default/database.yml.j2 dest=/etc/redmine/default/database.yml
+  notify: restart thin
+
+- name: TEMPLATE | Deploy nginx vhost
+  template: src=etc/nginx/sites-available/redmine.j2 dest=/etc/nginx/sites-available/{{ vhost_redmine.name }} validate='nginx -t'
+  notify: reload nginx
