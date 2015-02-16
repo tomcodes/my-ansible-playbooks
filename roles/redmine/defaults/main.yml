@@ -1,5 +1,3 @@
-redmine_version: '2'
-
 redmine_database:
   adapter: 'mysql'
   database: 'redmine'
@@ -7,4 +5,51 @@ redmine_database:
   port: 3306
   username: 'redmine'
   password: 'change_me_NOW' 
+  admin_username: 'root'
+  admin_password: 'change_me_NOW' 
+
+redmine_use_nginx: false
+redmine_use_local_mysql: true
+    
+redmine_vhost:
+  name: 'redmine'
+  server_name: 'http://my.redmine.host.tld'
+
+
+redmine_debconf:
+  - question: 'redmine/instances/default/dbconfig-install'
+    value: 'true'
+    vtype: 'boolean'
+  - question: 'redmine/instances/default/db/app-user'
+    value: '{{ redmine_database.username }}'
+    vtype: 'string' 
+  - question: 'redmine/instances/default/pgsql/app-pass'
+    value: '{{ redmine_database.password }}'
+    vtype: 'password' 
+  - question: 'redmine/instances/default/db/dbname'
+    value: '{{ redmine_database.database }}'
+    vtype: 'string'
+  - question: 'redmine/instances/default/db/admin-user'
+    value: '{{ redmine_database.admin_username }}'
+    vtype: 'string' 
+  - question: 'redmine/instances/default/pgsql/admin-pass'
+    value: '{{ redmine_database.admin_password }}'
+    vtype: 'password' 
+  - question: 'redmine/instances/default/database-type'
+    value: 'mysql' # TODO: check with postgresql (value seems 'pgsql')
+    vtype: 'select' 
+
+thin:
+  chdir: '{{ redmine_dir }}'
+  environment: 'production'
+  address: '127.0.0.1'
+  port: 3000
+  timeout: 30
+  log: /var/log/thin.log
+  pid: tmp/pids/thin.pid
+  max_conns: 1024
+  max_persistent_conns: 512
+  wait: 30
+  servers: 2
+  daemonize: true 
 

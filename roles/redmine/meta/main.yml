@@ -2,3 +2,5 @@
 
 dependencies:
   - minimal
+  - { role: nginx, when: redmine_use_nginx }
+  - { role: mysql, when: redmine_use_local_mysql }

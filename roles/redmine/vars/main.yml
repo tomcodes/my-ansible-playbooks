@@ -1,1 +1,2 @@
 ruby_version: '1.9.1'
+redmine_dir: '/usr/share/redmine'

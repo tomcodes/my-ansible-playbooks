@@ -1,25 +1,31 @@
 ---
 
+- name: DEBCONF | Prepare Redmine install
+  debconf: name=redmine question={{ item.question }} value={{ item.value }} vtype={{ item.vtype }}
+  with_items: redmine_debconf
+
+  # Specific debian wheezy!
 - name: APT | Install redmine 
-  apt: 
-    pkg=redmine
-    state=latest
-    update_cache=yes
-    cache_valid_time=3600
-    default_release={% if redmine_version eq '2' %}wheezy-backports{% else %}wheezy{% endif %}
+  apt: pkg={{ item }} state=latest update_cache=yes cache_valid_time=3600 default_release=wheezy-backports
+  with_items:
+    - redmine
+    - redmine-mysql
+  notify: restart thin
 
 - name: APT | Install thin
   apt: pkg=thin state=latest cache_valid_time=3600
 
   # Specific debian wheezy!
 - name: TEMPLATE | Deploy thin configuration
-  template: src=etc/thinX/redmine.yml.j2 dest=etc/thin{{ ruby_version }}/redmine.yml
+  template: src=etc/thinX/redmine.yml.j2 dest=/etc/thin{{ ruby_version }}/redmine.yml
   notify: restart thin
 
+  # TODO: support PostgreSQL
 - name: TEMPLATE | Deploy redmine (database) configuration
   template: src=etc/redmine/default/database.yml.j2 dest=/etc/redmine/default/database.yml
   notify: restart thin
 
-- name: TEMPLATE | Deploy nginx vhost
-  template: src=etc/nginx/sites-available/redmine.j2 dest=/etc/nginx/sites-available/{{ vhost_redmine.name }} validate='nginx -t'
-  notify: reload nginx
+- name: INCLUDE | Configure nginx as reverse proxy
+  include: nginx.yml
+  when: redmine_use_nginx
+

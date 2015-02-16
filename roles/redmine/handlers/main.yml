@@ -1,0 +1,7 @@
+---
+
+- name: reload nginx
+  action: service name=nginx state=reloaded enabled=yes
+
+- name: restart thin
+  action: service name=thin state=restarted enabled=yes

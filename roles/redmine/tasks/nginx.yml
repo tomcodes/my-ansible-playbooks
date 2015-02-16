@@ -1,0 +1,7 @@
+- name: TEMPLATE | Deploy nginx vhost
+  template: src=etc/nginx/sites-available/redmine.j2 dest=/etc/nginx/sites-available/{{ redmine_vhost.server_name }} validate='nginx -t'
+  notify: reload nginx
+
+- name: FILE | Enable vhost
+  file: src=/etc/nginx/sites-available/{{ redmine_vhost.server_name }} dest=/etc/nginx/sites-enabled/{{ redmine_vhost.server_name }} state=link
+  notify: reload nginx
